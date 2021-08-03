@@ -1,13 +1,12 @@
 package com.ers.services;
 
-import java.sql.SQLException;
-
 import com.ers.dao.UserDao;
+import com.ers.enums.UserRole;
 import com.ers.exceptions.InvalidCredentialsException;
 import com.ers.exceptions.UserDoesNotExistException;
 import com.ers.exceptions.UsernameAlreadyExistsException;
 import com.ers.models.User;
-import com.ers.models.UserRole;
+import com.ers.models.UserRoles;
 import com.ers.logging.Logging;
 
 public class UserService {
@@ -18,15 +17,10 @@ public class UserService {
 		this.uDao = u;
 	}
 	
-	public User signUp(String username, String password, String firstname, String lastname, String email, UserRole role) {
+	public User signUp(String firstname, String lastname, String username, String email, String password, UserRoles role) {
 		User u = new User(username, password, firstname, lastname, email, role);
-		
-		try {
-			uDao.createUser(u);
-			Logging.logger.info("New User Has Registered");
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
+		uDao.createUser(u);
+		Logging.logger.info("New User Has Registered");
 		
 		u = uDao.getUserByUsername(u.getUsername());
 		
@@ -51,4 +45,7 @@ public class UserService {
 		}
 	}
 	
+	public User getUserByUsername(String username) {
+		return uDao.getUserByUsername(username);
+	}
 }

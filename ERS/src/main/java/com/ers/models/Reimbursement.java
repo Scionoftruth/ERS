@@ -1,13 +1,18 @@
 package com.ers.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.ers.enums.RType;
+import com.ers.enums.Status;
 
 @Entity
 @Table(name="reimbursement")
@@ -18,14 +23,17 @@ public class Reimbursement {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(length=8)
-	private RType type;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="re_type_id")
+	private ReimbursementType type;
 	
 	@Column(name="amount", nullable=false)
 	private double amount;
 	
-	@Column(name="resolved_date", nullable=false)
+	@Column(name="submitted_date", nullable=false)
+	private String submitteddate;
+	
+	@Column(name="resolved_date")
 	private String resolveddate; 
 	
 	@Column(name="description", nullable=false)
@@ -34,36 +42,62 @@ public class Reimbursement {
 	
 	//private String receipt;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(length=8)
-	private Status status;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="re_status_id")
+	private ReimbursementStatus status;
+	
+	@ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id")
+	private User employee;
+	
+	@ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id", updatable=false, insertable=false)
+	private User manager;
 	
 	public Reimbursement() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Reimbursement(int id, RType type, double amount, String resolveddate, String description, /*String receipt,*/ Status status) {
+	public Reimbursement(int id, ReimbursementType type, double amount, String submitteddate, String resolveddate, String description, /*String receipt,*/ ReimbursementStatus status) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.amount = amount;
+		this.submitteddate=submitteddate;
 		this.resolveddate = resolveddate;
 		this.description = description;
 		//this.receipt = receipt;
 		this.status = status;
 	}
 	
-	public Reimbursement(RType type, double amount, String resolveddate, String description, /*String receipt,*/ Status status) {
+	public Reimbursement(ReimbursementType type, double amount, String submitteddate, /*String resolveddate,*/ String description, /*String receipt,*/ ReimbursementStatus status, User employee) {
 		super();
 		this.type = type;
 		this.amount = amount;
-		this.resolveddate = resolveddate;
+		this.submitteddate= submitteddate;
+		//this.resolveddate = resolveddate;
 		this.description = description;
 		//this.receipt = receipt;
 		this.status = status;
+		this.employee=employee;
+		//this.managerConnection=manager;
 	}
 	
+	public Reimbursement(int id, ReimbursementType type, double amount, String submitteddate, String resolveddate, String description, ReimbursementStatus status, User employee, User manager) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.amount = amount;
+		this.submitteddate=submitteddate;
+		this.resolveddate = resolveddate;
+		this.description = description;
+		this.status = status;
+		this.employee = employee;
+		this.manager=manager;
+	}
+	
+
 	public int getId() {
 		return id;
 	}
@@ -72,11 +106,11 @@ public class Reimbursement {
 		this.id = id;
 	}
 	
-	public RType getType() {
+	public ReimbursementType getType() {
 		return type;
 	}
 	
-	public void setType(RType type) {
+	public void setType(ReimbursementType type) {
 		this.type = type;
 	}
 	
@@ -88,11 +122,11 @@ public class Reimbursement {
 		this.amount = amount;
 	}
 	
-	public Status getStatus() {
+	public ReimbursementStatus getStatus() {
 		return status;
 	}
 	
-	public void setStatus(Status resolved) {
+	public void setStatus(ReimbursementStatus resolved) {
 		this.status = resolved;
 	}
 	
@@ -120,10 +154,45 @@ public class Reimbursement {
 		this.resolveddate=resolveddate;
 	}
 
+	public User getUserConnection() {
+		return employee;
+	}
+
+	public void setUserConnection(User userConnection) {
+		this.employee = userConnection;
+	}
+	
+	
+
+	public String getSubmitteddate() {
+		return submitteddate;
+	}
+
+	public void setSubmitteddate(String submitteddate) {
+		this.submitteddate = submitteddate;
+	}
+
+	public String getResolveddate() {
+		return resolveddate;
+	}
+
+	public void setResolveddate(String resolveddate) {
+		this.resolveddate = resolveddate;
+	}
+
+	public User getManager() {
+		return manager;
+	}
+
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
+
 	@Override
 	public String toString() {
-		return "Reimbursment [id=" + id + ", type=" + type + ", amount=" + amount + ", resolveddate=" + resolveddate
-				+ ", description=" + description + /*", receipt=" + receipt +*/ ", status=" + status + "]";
+		return "Reimbursement [id=" + id + ", type=" + type + ", amount=" + amount + ", submitteddate=" + submitteddate
+				+ ", resolveddate=" + resolveddate + ", description=" + description + ", status=" + status
+				+ ", employee=" + employee + ", manager=" + manager + "]";
 	}
 	
 	

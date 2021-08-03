@@ -1,29 +1,30 @@
 package com.ers.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.ers.enums.UserRole;
 
 @Entity
 @Table(name="users")
 public class User {
 	
-	
 	@Id
-	@Column(name="user_id")
+	@Column(name="user_id", nullable=false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	
-	@Column(name="username", nullable=false, unique=true)
-	private String username;
-	
-	@Column(name="password", nullable=false)
-	private String password;
 	
 	@Column(name="first_name", nullable=false)
 	private String firstname;
@@ -31,19 +32,33 @@ public class User {
 	@Column(name="last_name", nullable=false)
 	private String lastname;
 	
+	@Column(name="username", nullable=false, unique=true)
+	private String username;
+	
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(length=8)
-	private UserRole role;
+	@Column(name="password", nullable=false)
+	private String password;
+	
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="u_roles_id")
+	private UserRoles role;
+	
+	@OneToMany(mappedBy="employee")
+	private List<Reimbursement> employees = new ArrayList<Reimbursement>();
+	
+	@OneToMany(mappedBy="manager")
+	private List<Reimbursement> manager = new ArrayList<Reimbursement>();
+	
+	
 	
 	public User() {
 		super();
 	}
 
-	public User(int id, String username, String password, String firstname, String lastname, String email,
-			UserRole role) {
+	public User(int id, String firstname, String lastname, String username, String email, String password,
+			UserRoles role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -54,7 +69,7 @@ public class User {
 		this.role = role;
 	}
 
-	public User(String username, String password, String firstname, String lastname, String email, UserRole role) {
+	public User(String firstname, String lastname, String username, String email, String password, UserRoles role) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -62,6 +77,7 @@ public class User {
 		this.lastname = lastname;
 		this.email = email;
 		this.role = role;
+	
 	}
 
 	public int getId() {
@@ -112,18 +128,20 @@ public class User {
 		this.email = email;
 	}
 
-	public UserRole getRole() {
+	public UserRoles getRole() {
 		return role;
 	}
 
-	public void setRole(UserRole role) {
+	public void setRole(UserRoles role) {
 		this.role = role;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", email=" + email + ", role=" + role + "]";
+		return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", username=" + username
+				+ ", email=" + email + ", password=" + password + ", role=" + role + "]";
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.ers.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.ers.models.User;
@@ -11,7 +10,9 @@ public interface UserDao {
 	
 	User getUserByUsername(String username);
 	
-	void createUser(User u) throws SQLException;
+	User getUserById(int id);
+	
+	void createUser(User u) /*throws SQLException*/;
 	
 	void updateUser(User u);
 	
