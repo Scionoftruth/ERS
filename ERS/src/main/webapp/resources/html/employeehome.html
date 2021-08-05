@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Employee Home</title>
-        <meta charset="utf-8">
+        <meta charset="ISO-8859-1">
+        <title>Expense Reimbursement System</title>
+        <link rel="stylesheet" href="../css/navbar.css">
+        <link rel="stylesheet" href="../css/employee.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link
+	        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+	        rel="stylesheet">
     </head>
     <body>
-        <button name='logout'>Logout</button>
+	    <div class="navbar">
+		    <ul class="nav-items">
+			    <li class="nav-item">Home</li>
+			    <li class="nav-item" id="detailed">Actions</li>
+			    <li class="nav-item" id="logout">Logout</li>
+		    </ul>
+	    </div>
+	<div class="container">
+	<!--	<h3 id="welcome">Welcome #Placerholder#!</h3>  -->
+
+		<div class="reimbursements">
+			<h1 id="re-name">Your Reimbursement History</h1>
+			<table id="re-table" class="reimbursement-table">
+				<tr>
+					<th>Reimbursement Status</th>
+					<th>Reimbursement Type</th>
+					<th>Reimbursement Amount</th>
+					<th>Date of Submission</th>
+					<th>Date of Resolution</th>
+					<th>Reimbursement Resolver</th>
+				</tr>
+			</table>
+			<!-- When this button is clicked I will manipulate the dom and add a form that you can fill out -->
+			<button id="new-ticket">Request a Reimbursement</button>
+			<div class="new-reimbursement" id="new-reimbursement">
+				<form id='newRequest'>
+                    <label for='type'>Reimbursement Type: </label>
+                    <select id='type' name='type' required id='type'>
+                        <option value="none" selected disabled hidden>Select an Option</option>
+                        <option value='LODGING'>Lodging</option>
+                        <option value='TRAVEL'>Travel</option>
+                        <option value='FOOD'>Food</option>
+                        <option value='OTHER'>Other</option>
+                    </select>
+                    <label for='amount'>Amount: </label>
+                    <input type='number' step='any' name='amount' min="0" required id='amount'>
+                    <label for='description'>Description: </label>
+                    <input type='text' name='description' maxlength='150' required id='description'>
+                    <input type='submit' value="New Request"/>
+                </form>
+			    </div>
+		    </div>
+	    </div>
+	    <script src="../js/employeehome.js"></script>
+	    <script src="../js/logout.js"></script>
     </body>
-    <script src="resources/js/employeehome.js"></script>
 </html>

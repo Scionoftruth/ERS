@@ -9,6 +9,7 @@ import com.ers.controllers.LoginController;
 import com.ers.controllers.LogoutController;
 import com.ers.controllers.RegistrationController;
 import com.ers.controllers.ReimbursementController;
+import com.ers.controllers.SessionController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class JsonServletHelper {
@@ -27,6 +28,12 @@ public class JsonServletHelper {
 				break;
 			case "/ERS/api/newreimbursement":
 				ReimbursementController.addReimbursements(req, res);
+				break;
+			case "ERS/api/logout":
+				LogoutController.logout(req, res);
+				break;
+			case "ERS/api/getSession":
+				SessionController.getSession(req, res);
 				break;
 		}
 	}

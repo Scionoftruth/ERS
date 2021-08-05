@@ -1,5 +1,6 @@
 package com.ers.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ers.dao.ReimbursementDao;
@@ -48,6 +49,22 @@ public class ReimbursementService {
 		return rDao.getAllDeniedReimbursments();
 	}
 	
+	public List<Reimbursement> getAllReimbursementsForUser(User u){
+		List<Reimbursement> superList = new ArrayList<Reimbursement>();
+		List<Reimbursement> a = rDao.getAllAcceptedReimbursmentsForUser(u);
+		for(Reimbursement re:a) {
+			superList.add(re);
+		}
+		List<Reimbursement> p = rDao.getAllPendingReimbursmentsForUser(u);
+		for(Reimbursement r:p) {
+			superList.add(r);
+		}
+		List<Reimbursement> d = rDao.getAllDeniedReimbursmentsForUser(u);
+		for(Reimbursement rd:d) {
+			superList.add(rd);
+		}
+		return superList;
+	}
 	
 	//public Reimbursement getReimbursementById(int id) {
 	//	rDao.getReimbursementById(id);

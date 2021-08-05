@@ -14,6 +14,7 @@ import com.ers.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class LoginController {
 
@@ -49,7 +50,11 @@ public class LoginController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			res.addHeader("Access-Control-Allow-Origin", "*");
 			res.setHeader("Access-Control-Allow-Methods", "POST");
-			res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+			ObjectNode user = mapper.createObjectNode();
+			
+			user.put("id", u.getId());
+			user.put("role", role);
+			res.getWriter().write(new ObjectMapper().writeValueAsString(user));
 		}
 		catch(Exception e) {
 			e.printStackTrace();

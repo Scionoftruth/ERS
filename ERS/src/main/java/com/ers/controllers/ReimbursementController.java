@@ -21,7 +21,6 @@ import com.ers.models.ReimbursementType;
 import com.ers.models.User;
 import com.ers.services.ReimbursementService;
 import com.ers.services.UserService;
-import com.example.models.PostDisplay;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,17 +35,19 @@ public class ReimbursementController {
 	private static StatusDao sDao = new StatusDao();
 	private static TypeDao tDao = new TypeDao();
 	
+	public static void getAllByUser(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+		
+		User u;
+		List<Reimbursement> re = rServ.getAllReimbursementsForUser(u);
+		System.out.println(re);
+		res.addHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Methods", "GET");
+		res.getWriter().write(new ObjectMapper().writeValueAsString(re));
+	
+	}
+	
 	public static void addReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
-		if(req.getMethod().equals("GET")) {
-			
-			List<Reimbursments> re = rServ.
-			System.out.println(re);
-			res.addHeader("Access-Control-Allow-Origin", "*");
-			res.setHeader("Access-Control-Allow-Methods", "GET");
-			res.getWriter().write(new ObjectMapper().writeValueAsString(re));
-			
-		}
-	else {
+		
 		StringBuilder buffer = new StringBuilder();
 		BufferedReader reader = req.getReader();
 		
@@ -77,7 +78,7 @@ public class ReimbursementController {
 		ret.put("message", "Successfully Sumbmitted A New Reimbursement Request");
 		
 		res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
-	}//}
+	}
 	
 	public static List<Reimbursement> getPendingReimbursements() {
 		return rServ.getAllPendingReimbursements();
