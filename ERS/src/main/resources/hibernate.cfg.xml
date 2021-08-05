@@ -20,14 +20,14 @@
 		
 		<property name="hibernate.connection_pool">10</property>
 		
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<!-- Under this comment we will map our java classes to db tables -->
 		<mapping class="com.ers.models.User"/>
 		<mapping class="com.ers.models.Reimbursement"/>
-		<mapping class="com.ers.models.RType"/>
-		<mapping class="com.ers.models.Status"/>
-		<mapping class="com.ers.models.UserRole"/>
+		<mapping class="com.ers.models.ReimbursementType"/>
+		<mapping class="com.ers.models.ReimbursementStatus"/>
+		<mapping class="com.ers.models.UserRoles"/>
 		
 	</session-factory>	
 

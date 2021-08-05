@@ -41,7 +41,7 @@ public class User {
 	@Column(name="password", nullable=false)
 	private String password;
 	
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="u_roles_id")
 	private UserRoles role;
 	
@@ -135,13 +135,22 @@ public class User {
 	public void setRole(UserRoles role) {
 		this.role = role;
 	}
+
+	/*
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", username=" + username
+				+ ", email=" + email + ", password=" + password + ", role=" + role + "]";
+	}*/
 	
 	
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", username=" + username
-				+ ", email=" + email + ", password=" + password + ", role=" + role + "]";
+		return  "\n"+"Id: " + id + "\n" + "First Name: " + firstname + "\n" + "Last Name: " + lastname + "\n" + "Username: " + username
+				+ "\n" + "Email: " + email + "\n" + "Password: " + password + "\n"+ "Role: " + role + "\n";
 	}
+	
+	
 
 }

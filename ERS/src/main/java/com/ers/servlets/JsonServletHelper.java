@@ -19,16 +19,15 @@ public class JsonServletHelper {
 			case "/ERS/api/login":
 				LoginController.login(req,res);
 				break;
-			case "ERS/api/logout":
+			case "/ERS/api/logout":
 				LogoutController.logout(req, res);
 				break;
-			case "ERS/api/register":
+			case "/ERS/api/register":
 				RegistrationController.register(req, res);
 				break;
-			case "ERS/api/newreimbursement":
+			case "/ERS/api/newreimbursement":
 				ReimbursementController.addReimbursements(req, res);
-			case "ERS/api/updateinformation":
-				
+				break;
 		}
 	}
 	

@@ -23,7 +23,7 @@ public class Reimbursement {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="re_type_id")
 	private ReimbursementType type;
 	
@@ -42,7 +42,7 @@ public class Reimbursement {
 	
 	//private String receipt;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="re_status_id")
 	private ReimbursementStatus status;
 	
@@ -190,9 +190,9 @@ public class Reimbursement {
 
 	@Override
 	public String toString() {
-		return "Reimbursement [id=" + id + ", type=" + type + ", amount=" + amount + ", submitteddate=" + submitteddate
-				+ ", resolveddate=" + resolveddate + ", description=" + description + ", status=" + status
-				+ ", employee=" + employee + ", manager=" + manager + "]";
+		return  "\n" + "Id: " + id + "\n" + "Type: " + type + "\n" + "Amount: " + amount + "\n" + "Submitted Date: " + submitteddate
+				+ "\n" + "Resolved Date: " + resolveddate + "\n" + "Description: " + description + "\n" + "Status: " + status
+				+ "\n"+ "\n" + "Employee: " + employee + "\n" + "Manager: " + manager + "\n";
 	}
 	
 	

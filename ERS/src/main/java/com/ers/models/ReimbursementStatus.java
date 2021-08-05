@@ -51,7 +51,7 @@ public class ReimbursementStatus {
 
 	@Override
 	public String toString() {
-		return "ReimbursementStatus [id=" + id + ", reimbursement_status=" + reimbursement_status + "]";
+		return ""+reimbursement_status;
 	}
 	
 	

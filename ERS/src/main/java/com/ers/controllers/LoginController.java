@@ -10,6 +10,7 @@ import com.ers.dao.UserDao;
 import com.ers.dao.UserDaoDB;
 import com.ers.models.User;
 import com.ers.services.UserService;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,10 +30,8 @@ public class LoginController {
 			buffer.append(line);
 			buffer.append(System.lineSeparator());
 		}
-		
 		String data = buffer.toString();
 		System.out.println(data);
-		
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode parsedObj = mapper.readTree(data);
 		
@@ -40,16 +39,22 @@ public class LoginController {
 		String password = parsedObj.get("password").asText();
 		
 		try {
-			System.out.println("In The Login Attempt");
+			System.out.println("In The Login Handler");
 			User u = uServ.signIn(username, password);
 			System.out.println(u);
+			String role = u.getRole().getU_role().name();
+			req.getSession().setAttribute("role", role);
 			
 			req.getSession().setAttribute("id", u.getId());
 			res.setStatus(HttpServletResponse.SC_OK);
+			res.addHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("Access-Control-Allow-Methods", "POST");
 			res.getWriter().write(new ObjectMapper().writeValueAsString(u));
-		}catch(Exception e) {
+		}
+		catch(Exception e) {
+			e.printStackTrace();
 			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
-			res.getWriter().println("Username Or Password Was Incorrect");
+			res.getWriter().println("Username or password incorrect");
 		}
 	}
 	
