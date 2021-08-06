@@ -37,13 +37,25 @@ public class ReimbursementController {
 	
 	public static void getAllByUser(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
 		
-		User u;
+		int id = Integer.parseInt(req.getSession().getAttribute("id").toString());
+		User u = uServ.getUserById(id);
 		List<Reimbursement> re = rServ.getAllReimbursementsForUser(u);
 		System.out.println(re);
 		res.addHeader("Access-Control-Allow-Origin", "*");
 		res.setHeader("Access-Control-Allow-Methods", "GET");
 		res.getWriter().write(new ObjectMapper().writeValueAsString(re));
 	
+	}
+	
+	public static void getUserById(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+		
+		int id = Integer.parseInt(req.getSession().getAttribute("id").toString());
+		User u = uServ.getUserById(id);
+		System.out.println(u);
+		res.addHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Methods", "GET");
+		res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+		
 	}
 	
 	public static void addReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
@@ -61,15 +73,29 @@ public class ReimbursementController {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode parsedObj = mapper.readTree(data);
 		
-		String retype = parsedObj.get("result").asText();
-		ReimbursementType type;
+		String retype = parsedObj.get("type").asText();
+		ReimbursementType type = new ReimbursementType();
+		switch(retype) {
+			case "LODGING":
+				type = tDao.getTypeById(6);
+				break;
+			case "TRAVEL":
+				type = tDao.getTypeById(7);
+				break;
+			case "FOOD":
+				type = tDao.getTypeById(8);
+				break;
+			case "OTHER":
+				type = tDao.getTypeById(9);
+				break;
+		}
 		double amount = Double.parseDouble(parsedObj.get("amount").asText());
 		String date = parsedObj.get("date").asText();
 		//String resolveddate = parsedObj.get("resolveddate").asText();
-		String description = parsedObj.get("description").asText();
+		String description = parsedObj.get("desc").asText();
 		//Status status;
-		String userName = parsedObj.get("username").asText();
-		User creator = uServ.getUserByUsername(userName);
+		int userName = Integer.parseInt(parsedObj.get("author").asText());
+		User creator = uServ.getUserById(userName);
 		ReimbursementStatus status = sDao.getStatusById(3);
 		
 		rServ.addReimbursement(type, amount, date, description, status, creator);
@@ -101,7 +127,7 @@ public class ReimbursementController {
 		String today = parsedObj.get("today").asText();
 		int rint = Integer.parseInt(parsedObj.get("r_id").asText());
 		Reimbursement r = rDao.getReimbursementById(rint);
-		int managerId = Integer.parseInt(parsedObj.get("manager_id").asText());
+		int managerId = Integer.parseInt(parsedObj.get("id").asText());
 		User manager = uDao.getUserById(managerId);
 		ReimbursementStatus rs = sDao.getStatusById(4);
 				
@@ -125,7 +151,7 @@ public class ReimbursementController {
 		String today = parsedObj.get("today").asText();
 		int rint = Integer.parseInt(parsedObj.get("r_id").asText());
 		Reimbursement r = rDao.getReimbursementById(rint);
-		int managerId = Integer.parseInt(parsedObj.get("manager_id").asText());
+		int managerId = Integer.parseInt(parsedObj.get("id").asText());
 		User manager = uDao.getUserById(managerId);
 		ReimbursementStatus status = sDao.getStatusById(5);
 				

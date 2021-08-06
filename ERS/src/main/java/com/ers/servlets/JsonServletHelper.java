@@ -29,12 +29,14 @@ public class JsonServletHelper {
 			case "/ERS/api/newreimbursement":
 				ReimbursementController.addReimbursements(req, res);
 				break;
-			case "ERS/api/logout":
-				LogoutController.logout(req, res);
-				break;
-			case "ERS/api/getSession":
+			case "/ERS/api/getSession":
 				SessionController.getSession(req, res);
 				break;
+			case "/ERS/api/getAllById":
+				ReimbursementController.getAllByUser(req, res);
+				break;
+			case "/ERS/api/getUser":
+				ReimbursementController.getUserById(req, res);
 		}
 	}
 	

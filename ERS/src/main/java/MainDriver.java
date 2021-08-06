@@ -31,55 +31,55 @@ public class MainDriver {
 		StatusDao sDao = new StatusDao();
 		TypeDao tDao = new TypeDao();
 		
-		UserRoles e = new UserRoles(0,UserRole.EMPLOYEE);
-		urDao.insert(e);
-		UserRoles m = new UserRoles(1,UserRole.MANAGER);
-		urDao.insert(m);
-		
-		ReimbursementStatus rs1 = new ReimbursementStatus(0,Status.PENDING);
-		sDao.insert(rs1);
-		ReimbursementStatus rs2 = new ReimbursementStatus(1,Status.APPROVED);
-		sDao.insert(rs2);
-		ReimbursementStatus rs3 = new ReimbursementStatus(2,Status.DENIED);
-		sDao.insert(rs3);
-		
-		ReimbursementType t1 = new ReimbursementType(0,RType.LODGING);
-		tDao.insert(t1);
-		ReimbursementType t2 = new ReimbursementType(1,RType.TRAVEL);
-		tDao.insert(t2);
-		ReimbursementType t3 = new ReimbursementType(2,RType.FOOD);
-		tDao.insert(t3);
-		ReimbursementType t4 = new ReimbursementType(3,RType.OTHER);
-		tDao.insert(t4);
-		
-		//User blank = new User("a","a","a","a","a",UserRole.EMPLOYEE);
-		//uDao.createUser(blank);
-		
-		User u1= new User("Charles","Allen","Scionoftruth","charlieallen132@hotmail.com","password", m);
-		uDao.createUser(u1);
-		
-		User u2 = new User("Test","User","Tester","tester@mail.com","password",e);
-		uDao.createUser(u2);
-		
-		User u3 = new User("Peter","Allen","Smorp123","peterallen@mail.com","password",e);
-		uDao.createUser(u3);
-		
-		Reimbursement r1 = new Reimbursement(t4,10,"Today","Some Stuff",rs1,u2);
-		rDao.createReimbursement(r1);
-		
-		Reimbursement r2 = new Reimbursement(t3,20,"Today","Good Food",rs1,u2);
-		rDao.createReimbursement(r2);
+//		UserRoles e = new UserRoles(0,UserRole.EMPLOYEE);
+//		urDao.insert(e);
+//		UserRoles m = new UserRoles(1,UserRole.MANAGER);
+//		urDao.insert(m);
+//		
+//		ReimbursementStatus rs1 = new ReimbursementStatus(0,Status.PENDING);
+//		sDao.insert(rs1);
+//		ReimbursementStatus rs2 = new ReimbursementStatus(1,Status.APPROVED);
+//		sDao.insert(rs2);
+//		ReimbursementStatus rs3 = new ReimbursementStatus(2,Status.DENIED);
+//		sDao.insert(rs3);
+//		
+//		ReimbursementType t1 = new ReimbursementType(0,RType.LODGING);
+//		tDao.insert(t1);
+//		ReimbursementType t2 = new ReimbursementType(1,RType.TRAVEL);
+//		tDao.insert(t2);
+//		ReimbursementType t3 = new ReimbursementType(2,RType.FOOD);
+//		tDao.insert(t3);
+//		ReimbursementType t4 = new ReimbursementType(3,RType.OTHER);
+//		tDao.insert(t4);
+//		
+//		//User blank = new User("a","a","a","a","a",UserRole.EMPLOYEE);
+//		//uDao.createUser(blank);
+//		
+//		User u1= new User("Charles","Allen","Scionoftruth","charlieallen132@hotmail.com","password", m);
+//		uDao.createUser(u1);
+//		
+//		User u2 = new User("Test","User","Tester","tester@mail.com","password",e);
+//		uDao.createUser(u2);
+//		
+//		User u3 = new User("Peter","Allen","Smorp123","peterallen@mail.com","password",e);
+//		uDao.createUser(u3);
+//		
+//		Reimbursement r1 = new Reimbursement(t4,10,"8/6/21","Some Stuff",rs1,u2);
+//		rDao.createReimbursement(r1);
+//		
+//		Reimbursement r2 = new Reimbursement(t3,20,"8/6/21","Good Food",rs1,u2);
+//		rDao.createReimbursement(r2);
 		
 		
 		//uDao.updateUser(u2);
-		//User u1 = uDao.getUserByUsername("Scionoftruth");
-		//User u2 = uDao.getUserByUsername("Tester");
+		User u1 = uDao.getUserByUsername("Scionoftruth");
+		User u2 = uDao.getUserByUsername("Tester");
 		
 		ReimbursementStatus rst = sDao.getStatusById(4);
 		
-		Reimbursement r3 = new Reimbursement(t4,15,"Today","Some Stuff",rs1,u3);
+		//Reimbursement r3 = new Reimbursement(t4,15,"8/6/21","Some Stuff",rs1,u3);
 		//Reimbursement r3 = rDao.getReimbursementById(5);
-		rDao.updateReimbursement(r3);
+		//rDao.updateReimbursement(r3);
 		
 		//Reimbursement r2 = new Reimbursement(RType.FOOD,20,"Today","Open","Good Food",Status.PENDING,u2);
 		//Reimbursement r2 = rDao.getReimbursementById(3);
@@ -87,7 +87,7 @@ public class MainDriver {
 		
 		Reimbursement r = rDao.getReimbursementById(14);
 		
-		rDao.updateReimbursementByArgs(r.getId(), r.getType(), r.getAmount(), r.getSubmitteddate(), "Today", r.getDescription(), rst, u2, u1);
+		rDao.updateReimbursementByArgs(r.getId(), r.getType(), r.getAmount(), r.getSubmitteddate(), "8/7/21", r.getDescription(), rst, u2, u1);
 	
 		//Reimbursement test = rDao.getReimbursementById(4);
 		//System.out.println(test);

@@ -146,13 +146,6 @@ public class Reimbursement {
 		this.receipt = receipt;
 	}
 	*/
-	public String getResolveDate() {
-		return resolveddate;
-	}
-	
-	public void setResolveDate(String resolveddate) {
-		this.resolveddate=resolveddate;
-	}
 
 	public User getUserConnection() {
 		return employee;

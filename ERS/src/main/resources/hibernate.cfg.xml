@@ -11,8 +11,8 @@
 		<property name="hibernate.connection.url">jdbc:postgresql://java-uta-210621.cwknwhauywll.us-east-2.rds.amazonaws.com:5432/ersdb</property>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.dialect">org.hibernate.PostgreSQLDialect</property>
-		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
 		
 		<!-- Connection Pool, a method of speeding up DB calls, Hibernate will open up a number of connections in the tag below when it starts up
 			Every time you create a session, a session will borrow an active connection from the connection pool

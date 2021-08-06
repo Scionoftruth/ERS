@@ -11,21 +11,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class SessionController {
-	
+
 	public static void getSession(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
-		
 		HttpSession session = req.getSession();
+		
 		ObjectMapper mapper = new ObjectMapper();
+		
 		ObjectNode sesInfo = mapper.createObjectNode();
 		
-		if(session.getAttribute("id")==null) {
+		if(session.getAttribute("id") == null) {
 			res.setStatus(404);
-			res.getWriter().println("User Is Not Logged In");
+			res.getWriter().println("User is not logged in");
 			return;
 		}
+		System.out.println("inside getSession");
+		System.out.println(session.getAttribute("id"));
 		
-		sesInfo.put("userId", session.getAttribute("id").toString());
-		res.getWriter().write(new ObjectMapper().writeValueAsString(sesInfo));
+		sesInfo.put("id", session.getAttribute("id").toString());
+		
+		res.getWriter().write((new ObjectMapper().writeValueAsString(sesInfo)));
 	}
-
 }

@@ -26,7 +26,7 @@
 		let res = await req.json();
 		console.log(res);
 		if(res.role==='EMPLOYEE'){
-			location.href = 'resources/html/employeehome.html';
+			location.href = 'resources/html/employee-dashboard.html';
 		}else{
 			location.href = 'resources/html/managerhome.html';
 		}
@@ -35,5 +35,4 @@
 		alert("Username or Password was Incorrect");
 		return;	
 	}
-	//location.href = 'resources/html/employeehome.html';
 }

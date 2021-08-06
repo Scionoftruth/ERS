@@ -15,7 +15,7 @@ public class TypeDao {
 		tx.commit();
 	}
 	
-	public ReimbursementType getStatusById(int id) {
+	public ReimbursementType getTypeById(int id) {
 		Session ses = HibernateUtil.getSession();
 		ReimbursementType t = ses.createQuery("from ReimbursementType where id ="+id,ReimbursementType.class).uniqueResult();
 		return t;
