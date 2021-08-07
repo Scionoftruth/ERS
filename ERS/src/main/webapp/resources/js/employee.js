@@ -50,7 +50,7 @@ let populateTable = (objList) => {
 
 	let table = document.getElementById("re-table");
 
-	table.innerHTML = '<tr><th>REIMBURSEMENT STATUS</th><th>REIMBURSEMENT TYPE</th><th>REIMBURSEMENT AMOUNT</th><th>DATE OF SUBMISSION</th><th>DATE OF RESOLUTION</th><th>REIMBURSEMENT RESOLVER</th></tr>';
+	table.innerHTML = '<tr><th>Reimbursement Status</th><th>Reimbursement Type</th><th>Reimbursement Amount</th><th>Description</th><th>Date Of Submission</th><th>Date Of Resolution</th><th>Manager</th></tr>';
 
 
 	objList.forEach((obj) =>{
@@ -64,9 +64,11 @@ let populateTable = (objList) => {
 		type.innerHTML = obj.type.reimbursement_type;
 		let amount = row.insertCell(2);
 		amount.innerHTML = Number (obj.amount).toFixed(2);
-		let subDate = row.insertCell(3);
+		let description = row.insertCell(3);
+		description.innerHTML = obj.description;
+		let subDate = row.insertCell(4);
 		subDate.innerHTML = new Date(obj.submitteddate).toDateString();
-		let resDate = row.insertCell(4);
+		let resDate = row.insertCell(5);
 
 		if(obj.resolveddate !== null){
 		resDate.innerHTML = new Date(obj.resolveddate).toDateString();
@@ -75,7 +77,7 @@ let populateTable = (objList) => {
 		resDate.innerHTML = 'N/A';
 		}
 
-		let resolver = row.insertCell(5);
+		let resolver = row.insertCell(6);
 		if (obj.manager !== null) {
 			resolver.innerHTML = obj.manager.username;
 		}
@@ -91,7 +93,6 @@ let submitTicket = async (e) => {
 	
 
 	let amount = document.getElementById("amount").value;
-	let date = document.getElementById("date").value;
 	let type = document.getElementById("types").value;
 	let desc = document.getElementById("desc").value;
 	

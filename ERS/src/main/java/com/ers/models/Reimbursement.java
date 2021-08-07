@@ -13,8 +13,10 @@ import javax.persistence.Table;
 
 import com.ers.enums.RType;
 import com.ers.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Table(name="reimbursement")
 public class Reimbursement {
 	
@@ -39,6 +41,10 @@ public class Reimbursement {
 	@Column(name="description", nullable=false)
 	private String description;
 	
+	//@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	//@JoinColumn(name="user_id")
+	//@JsonIgnoreProperties("ers_reimb")
+	//private User user;
 	
 	//private String receipt;
 	
@@ -47,11 +53,11 @@ public class Reimbursement {
 	private ReimbursementStatus status;
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="employee_id")
 	private User employee;
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id", updatable=false, insertable=false)
+	@JoinColumn(name="manager_id")
 	private User manager;
 	
 	public Reimbursement() {

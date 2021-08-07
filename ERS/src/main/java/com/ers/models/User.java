@@ -16,9 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ers.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="users")
+@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 public class User {
 	
 	@Id
@@ -45,10 +48,12 @@ public class User {
 	@JoinColumn(name="u_roles_id")
 	private UserRoles role;
 	
-	@OneToMany(mappedBy="employee")
+	@OneToMany(mappedBy="employee",fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Reimbursement> employees = new ArrayList<Reimbursement>();
 	
-	@OneToMany(mappedBy="manager")
+	@OneToMany(mappedBy="manager",fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Reimbursement> manager = new ArrayList<Reimbursement>();
 	
 	
