@@ -90,13 +90,18 @@ let populateTable = (objList) => {
 
 let submitTicket = async (e) => {
 	e.preventDefault();
-	
+	await verifyLoggedIn();
+	let res = await fetch(`http://localhost:8080/ERS/api/getUser?userid=${userId}`);
+	let user = await res.json();
 
 	let amount = document.getElementById("amount").value;
 	let type = document.getElementById("types").value;
 	let desc = document.getElementById("desc").value;
+	let date = new Date().toLocaleDateString();
+	let author = user.id;
+
 	
-	if (!amount || !date || !desc) {
+	if (!amount || !desc) {
 		alert("Please fill the empty fields");
 		document.getElementById("re-form").reset();
 		return;
@@ -107,14 +112,12 @@ let submitTicket = async (e) => {
 		return;
 	}
 	else {
-		let d = Date.parse(date);
-		console.log(d);
 		let obj = {
 			amount: amount,
-			date: Date.parse(date),
+			date: date,
 			type: type,
 			desc: desc,
-			author: userId
+			author: author
 		};
 
 		let req = await fetch('http://localhost:8080/ERS/api/newreimbursement', {
@@ -151,6 +154,7 @@ let init = async () => {
 	document.getElementById("re-name").innerText = `${userName}'s Past Reimbursements`;
 	let reimbursements = await retreiveAllReimbursements();
 	populateTable(reimbursements);
+	console.log(user.id);
 }
 
 init();

@@ -6,8 +6,7 @@ import java.util.List;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
 
-import com.ers.enums.RType;
-import com.ers.enums.Status;
+
 import com.ers.models.Reimbursement;
 import com.ers.models.ReimbursementStatus;
 import com.ers.models.ReimbursementType;
