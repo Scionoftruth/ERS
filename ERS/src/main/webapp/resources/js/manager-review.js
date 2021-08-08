@@ -3,12 +3,13 @@ let userid;
 let verifyLoggedIn = async () => {
 	let res = await fetch('http://localhost:8080/ERS/api/getSession');
 	let obj = await res.json();
+	console.log(obj);
 	
 	if(obj.userid < 0){
 		location.href = "../html/index.html";
 	}
 	else{
-		userId = obj.userid;
+		userId = obj.id;
 	}
 }
 
@@ -25,7 +26,7 @@ document.getElementById("home").addEventListener('click', () => {
 /* Reimbursement functions */
 
 let populateTable = (list) => {
-
+	
 	let table = document.getElementById("re-table");
 	
 	table.innerHTML = '<tr><th>Status</th><th>Type</th><th>Amount</th><th>Empolyee</th><th>Submitted Date</th><th>Approve/Deny</th></tr>';
@@ -46,7 +47,7 @@ let populateTable = (list) => {
 		let subDate = row.insertCell(4);
 		subDate.innerHTML = new Date(obj.submitteddate).toDateString();
 		let appDen = row.insertCell(5);
-		appDen.innerHTML = `<button onclick="approve(${obj.reId})" id="appr">Approve</button> <button onclick="deny(${obj.reId})" id="deny">Deny</button>`;
+		appDen.innerHTML = `<button onclick="approve(${obj.id})" id="appr">Approve</button> <button onclick="deny(${obj.id})" id="deny">Deny</button>`;
 		let descRow = table.insertRow(index++);
 		let desc = descRow.insertCell(0);
 		desc.setAttribute("colspan", "6");
@@ -60,22 +61,29 @@ let populateTable = (list) => {
 let getPendingReimbursements = async () => {
 	let res = await fetch(`http://localhost:8080/ERS/api/getAllPending`);
 	let obj = await res.json();
+	console.log(obj);
 	return obj;
 }
 
 let approve = async (id) => {
 	
+	await verifyLoggedIn();
+	let rese = await fetch(`http://localhost:8080/ERS/api/getUser?userid=${userId}`);
+	let user = await rese.json();
+	console.log(user);
+	
 	console.log(`Approved this reimbursement ${id}`);
 	
 	let date = new Date().toLocaleDateString();
+	let manager = user.id;
 	
 	obj = {
-		userid : userId,
+		userid : manager,
 		reid : id,
 		date: date
 	}
 	
-	console.log(obj);
+	console.log(date);
 	
 	let res = await fetch(`http://localhost:8080/ERS/api/approveReimbursement`,
 	{
@@ -92,12 +100,18 @@ let approve = async (id) => {
 
 let deny = async (id) => {
 	
+	await verifyLoggedIn();
+	let rese = await fetch(`http://localhost:8080/ERS/api/getUser?userid=${userId}`);
+	let user = await rese.json();
+	console.log(user);
+	
 	console.log(`Deny this reimbursement ${id}`);
 	
 	let date = new Date().toLocaleDateString();
+	let manager = user.id;
 	
 	obj = {
-		userid : userId,
+		userid : manager,
 		reid : id,
 		date: date
 	}

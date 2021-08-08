@@ -149,9 +149,9 @@ public class ReimbursementController {
 		JsonNode parsedObj = mapper.readTree(data);
 		
 		String today = parsedObj.get("date").asText();
-		int rint = Integer.parseInt(parsedObj.get("id").asText());
+		int rint = Integer.parseInt(parsedObj.get("reid").asText());
 		Reimbursement r = rDao.getReimbursementById(rint);
-		int managerId = Integer.parseInt(parsedObj.get("userId").asText());
+		int managerId = Integer.parseInt(parsedObj.get("userid").asText());
 		User manager = uDao.getUserById(managerId);
 		ReimbursementStatus rs = sDao.getStatusById(4);
 				
@@ -172,10 +172,10 @@ public class ReimbursementController {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode parsedObj = mapper.readTree(data);
 		
-		String today = parsedObj.get("today").asText();
-		int rint = Integer.parseInt(parsedObj.get("r_id").asText());
+		String today = parsedObj.get("date").asText();
+		int rint = Integer.parseInt(parsedObj.get("reid").asText());
 		Reimbursement r = rDao.getReimbursementById(rint);
-		int managerId = Integer.parseInt(parsedObj.get("id").asText());
+		int managerId = Integer.parseInt(parsedObj.get("userid").asText());
 		User manager = uDao.getUserById(managerId);
 		ReimbursementStatus status = sDao.getStatusById(5);
 				
