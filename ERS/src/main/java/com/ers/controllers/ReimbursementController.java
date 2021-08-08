@@ -106,8 +106,32 @@ public class ReimbursementController {
 		res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
 	}
 	
-	public static List<Reimbursement> getPendingReimbursements() {
-		return rServ.getAllPendingReimbursements();
+	public static void getAllPendingReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+		List<Reimbursement> re = rServ.getAllPendingReimbursements();
+		res.addHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Methods", "GET");
+		res.getWriter().write(new ObjectMapper().writeValueAsString(re));
+	}
+	
+	public static void getAllAcceptedReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+		List<Reimbursement> re = rServ.getAllAcceptedReimbursements();
+		res.addHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Methods", "GET");
+		res.getWriter().write(new ObjectMapper().writeValueAsString(re));
+	}
+	
+	public static void getAllDeniedReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+		List<Reimbursement> re = rServ.getAllDeniedReimbursements();
+		res.addHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Methods", "GET");
+		res.getWriter().write(new ObjectMapper().writeValueAsString(re));
+	}
+	
+	public static void getAllReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+		List<Reimbursement> re = rServ.getAllReimbursements();
+		res.addHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Methods", "GET");
+		res.getWriter().write(new ObjectMapper().writeValueAsString(re));
 	}
 	
 	public static void acceptReimbursement(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
@@ -124,10 +148,10 @@ public class ReimbursementController {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode parsedObj = mapper.readTree(data);
 		
-		String today = parsedObj.get("today").asText();
-		int rint = Integer.parseInt(parsedObj.get("r_id").asText());
+		String today = parsedObj.get("date").asText();
+		int rint = Integer.parseInt(parsedObj.get("id").asText());
 		Reimbursement r = rDao.getReimbursementById(rint);
-		int managerId = Integer.parseInt(parsedObj.get("id").asText());
+		int managerId = Integer.parseInt(parsedObj.get("userId").asText());
 		User manager = uDao.getUserById(managerId);
 		ReimbursementStatus rs = sDao.getStatusById(4);
 				

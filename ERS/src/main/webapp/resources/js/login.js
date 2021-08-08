@@ -28,7 +28,7 @@
 		if(res.role==='EMPLOYEE'){
 			location.href = 'resources/html/employee-dashboard.html';
 		}else{
-			location.href = 'resources/html/managerhome.html';
+			location.href = 'resources/html/manager-dashboard.html';
 		}
 
 	} catch(e){

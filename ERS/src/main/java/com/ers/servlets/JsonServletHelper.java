@@ -37,6 +37,24 @@ public class JsonServletHelper {
 				break;
 			case "/ERS/api/getUser":
 				ReimbursementController.getUserById(req, res);
+				break;
+			case "/ERS/api/getAllPending":
+				ReimbursementController.getAllPendingReimbursements(req, res);
+				break;
+			case "/ERS/api/getAllAccepted":
+				ReimbursementController.getAllAcceptedReimbursements(req, res);
+				break;
+			case "/ERS/api/getAllDenied":
+				ReimbursementController.getAllDeniedReimbursements(req, res);
+				break;
+			case "/ERS/api/approveReimbursement":
+				ReimbursementController.acceptReimbursement(req, res);
+				break;
+			case "/ERS/api/denyReimbursement":
+				ReimbursementController.denyReimbursement(req, res);
+				break;
+			case "/ERS/api/getAllReimbursements":
+				ReimbursementController.getAllReimbursements(req, res);
 		}
 	}
 	

@@ -101,7 +101,7 @@ let submitTicket = async (e) => {
 	let author = user.id;
 
 	
-	if (!amount || !desc) {
+	/*if (!amount || !desc) {
 		alert("Please fill the empty fields");
 		document.getElementById("re-form").reset();
 		return;
@@ -111,7 +111,7 @@ let submitTicket = async (e) => {
 		document.getElementById("re-form").reset();
 		return;
 	}
-	else {
+	else {*/
 		let obj = {
 			amount: amount,
 			date: date,
@@ -136,7 +136,7 @@ let submitTicket = async (e) => {
 		let reimbursements = await retreiveAllReimbursements();
 		populateTable(reimbursements);
 	}
-}
+//}
 
 document.getElementById("send").addEventListener('click', submitTicket);
 
