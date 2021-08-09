@@ -1,0 +1,34 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+		<!-- Connection Information -->
+		<property name="hibernate.connection.username">ersuser</property>
+		<property name="hibernate.connection.password">password</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://java-uta-210621.cwknwhauywll.us-east-2.rds.amazonaws.com:5432/ersdb</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.dialect">org.hibernate.PostgreSQLDialect</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
+		
+		<!-- Connection Pool, a method of speeding up DB calls, Hibernate will open up a number of connections in the tag below when it starts up
+			Every time you create a session, a session will borrow an active connection from the connection pool
+			When you close a session the connection does not close it simply frees up and makes available that connection that the session was using -->
+		
+		<property name="hibernate.connection_pool">10</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<!-- Under this comment we will map our java classes to db tables -->
+		<mapping class="com.ers.models.User"/>
+		<mapping class="com.ers.models.Reimbursement"/>
+		<mapping class="com.ers.models.ReimbursementType"/>
+		<mapping class="com.ers.models.ReimbursementStatus"/>
+		<mapping class="com.ers.models.UserRoles"/>
+		
+	</session-factory>	
+
+</hibernate-configuration>

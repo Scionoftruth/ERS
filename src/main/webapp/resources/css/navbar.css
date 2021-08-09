@@ -1,0 +1,32 @@
+@charset "ISO-8859-1";
+
+body {
+	margin: 0;
+	font-family: 'Lato', sans-serif;
+}
+
+.nav-items {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-image: linear-gradient(to right,#080b3b,#9aa7db);
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.nav-item {
+	float: left;
+    display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+    margin-left: 20px;
+	text-decoration: none;
+}
+
+.nav-item:hover{
+    cursor: pointer;
+    background: #2e5f00;
+}
