@@ -23,9 +23,9 @@ public class JsonServletHelper {
 			case "/ERS/api/logout":
 				LogoutController.logout(req, res);
 				break;
-			case "/ERS/api/register":
-				RegistrationController.register(req, res);
-				break;
+			//case "/ERS/api/register":
+			//	RegistrationController.register(req, res);
+			//	break;
 			case "/ERS/api/newreimbursement":
 				ReimbursementController.addReimbursements(req, res);
 				break;

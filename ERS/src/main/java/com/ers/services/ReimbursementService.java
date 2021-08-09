@@ -73,15 +73,5 @@ public class ReimbursementService {
         return rDao.getReimbursementById(id);
     }
 
-//    private String me;
- //   private String notMe;
-//
-//    public String getMe() {
-//    	return me;
-//    }
-
-//    public String getNotMe() {
-//    	return notMe;
-//}
 	
 }

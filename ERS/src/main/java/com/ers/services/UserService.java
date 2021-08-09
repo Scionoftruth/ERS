@@ -17,6 +17,7 @@ public class UserService {
 		this.uDao = u;
 	}
 	
+	/*
 	public User signUp(String firstname, String lastname, String username, String email, String password, UserRoles role) {
 		User u = new User(username, password, firstname, lastname, email, role);
 		uDao.createUser(u);
@@ -30,7 +31,7 @@ public class UserService {
 		}
 		
 		return u;
-	}
+	}*/
 	
 	public User signIn(String username, String password) throws UserDoesNotExistException, InvalidCredentialsException{
 		

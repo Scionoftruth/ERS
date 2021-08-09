@@ -8,7 +8,7 @@ let verifyLoggedIn = async () => {
 	console.log(obj);
 
 	if (obj.userid < 0) {
-		location.href = "../html/index.html";
+		location.href = "resources/html/index.html";
 	}
 	else {
 		userId = obj.userid;
@@ -17,8 +17,7 @@ let verifyLoggedIn = async () => {
 
 document.getElementById("logout").addEventListener('click', async () => {
 	let res = await fetch('http://localhost:8080/ERS/api/logout');
-	userId = -1;
-	verifyLoggedIn();
+	location.href = "http://localhost:8080/ERS/";
 });
 
 document.getElementById("home").addEventListener('click', () => {

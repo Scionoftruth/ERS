@@ -20,8 +20,7 @@ document.getElementById("detailed").addEventListener('click', () => {
 
 document.getElementById("logout").addEventListener('click', async () => {
 	let res = await fetch('http://localhost:8080/ERS/api/logout');
-	userId = -1;
-	verifyLoggedIn();
+	location.href = "http://localhost:8080/ERS/";
 });
 
 /*

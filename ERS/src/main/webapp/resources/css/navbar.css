@@ -10,7 +10,7 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background-color: #080b3b;
+	background-image: linear-gradient(to right,#080b3b,#9aa7db);
 	position: fixed;
 	top: 0;
 	width: 100%;

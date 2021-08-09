@@ -3,7 +3,7 @@
 body {
 	margin: 0;
 	font-family: 'Roboto', sans-serif;
-	background: #91a796;
+	background: #e4decd;
 	color: #000000;
 }
 
@@ -25,6 +25,10 @@ body {
 	justify-content: center;
 }
 
+.welcome{
+	text-align:center;
+}
+
 .reimbursement-table {
 	border-collapse: collapse;
 }
@@ -40,20 +44,20 @@ tr:nth-child(even) {
 }
 
 tr:nth-child(even) {
-	background-color: #000000;
+	background-color: #82716e;
 	color: #D6D6D6;
 }
 
 tr:nth-child(odd) {
-	background-color: #005504;
-	color: #D6D6D6;
+	background-color: #c2b490;
+	color: #000000;
 }
 
 #filter {
 	margin-bottom: 1rem;
 	padding: 15px 32px;
 	border: none;
-	background-color: #005504;
+	background-color: #82716e;
 	color: #D6D6D6;
 	text-align: center;
 	text-decoration: none;
@@ -67,7 +71,7 @@ tr:nth-child(odd) {
 	margin-bottom: 1rem;
 	padding: 15px 32px;
 	border: none;
-	background-color: #005504;
+	background-color: #82716e;
 	color: #D6D6D6;
 	text-align: center;
 	text-decoration: none;

@@ -14,12 +14,11 @@ let verifyLoggedIn = async () => {
 
 document.getElementById("logout").addEventListener('click', async () => {
 	let res = await fetch('http://localhost:8080/ERS/api/logout');
-	userId = -1;
-	verifyLoggedIn();
+	location.href = "http://localhost:8080/ERS/";
 });
 
 document.getElementById("review").addEventListener('click', () => {
-	location.href = "../html/manager-review.html";
+	location.href = "resources/html/manager-review.html";
 });
 
 /* Reimbursement functions */

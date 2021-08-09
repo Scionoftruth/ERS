@@ -4,13 +4,18 @@ body{
 	
 	margin: 0;
 	font-family: 'Lato', sans-serif;
-	background-color: #ffffff;
+	background-color: #e4decd;
 	
 }
 
 .welcome{
-
+	
+	background:linear-gradient(to right, #fc9403, #b54222);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-weight: strong;
 	text-align:center;
+	font-size: 150%;
 	
 }
 
@@ -20,15 +25,17 @@ body{
 	display: flex;
 	flex-direction: column;
 	border-radius: 10px;
-	background-color: #91a796;
+	background-color: #82716e;
 	border: 2px solid #000000;
 	padding: 50px;
 }
 
-.login-container>h1 {
-	font-weight: 500;
-	margin-bottom: 20px;
+.login-container>h3 {
+	font-weight: 900;
+	margin-bottom: 30px;
 	color: #000000;
+	text-align: center;
+	
 }
 
 .login-container>form>h5 {
@@ -51,7 +58,7 @@ body{
 }
 
 .login-signinButton {
-	background:#005504;
+	background:#acb7ae;
 	border-radius: 20px;
 	width: 100%;
 	height: 30px;
@@ -74,7 +81,7 @@ body{
 }
 
 .container {
-	height: 100vh; display : flex;
+	height: 60vh; display : flex;
 	justify-content: center;
 	align-items: center;
 	display: flex;

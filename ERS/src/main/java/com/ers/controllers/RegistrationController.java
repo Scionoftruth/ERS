@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class RegistrationController {
 	
-	private static UserDao uDao = new UserDaoDB();
+	/*private static UserDao uDao = new UserDaoDB();
 	private static UserService uServ = new UserService(uDao);
 	private static RoleDao rDao = new RoleDao();
 	
@@ -64,5 +64,5 @@ public class RegistrationController {
 			res.getWriter().println("That Email Has Already Been Registered");
 		}
 		
-	}
+	}*/
 }

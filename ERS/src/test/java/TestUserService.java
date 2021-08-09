@@ -68,9 +68,19 @@ public class TestUserService {
 		User loggedIn = uServ.signIn("testuser", "testpass");
 	}
 	
+	//@Test
+	//public void testSignup() {
+	//	
+	//}
+	
 	@Test
-	public void testSignup() {
+	public void testGetUserByUsername() {
+		UserRoles e = new UserRoles(0,UserRole.EMPLOYEE);
 		
+		User u1 = new User(1,"test", "user", "testuser", "test@email.com", "testpass",e);
+		User not = new User(1, "test", "user","testuser", "test@mail.com", "wrongpass",e);
+		
+		assertEquals(uServ.getUserByUsername("testuser"), uServ.getUserById(1));
 	}
 	
 
