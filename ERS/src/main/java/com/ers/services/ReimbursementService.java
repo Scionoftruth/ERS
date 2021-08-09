@@ -69,5 +69,19 @@ public class ReimbursementService {
 	//public Reimbursement getReimbursementById(int id) {
 	//	rDao.getReimbursementById(id);
 	//}
+    public Reimbursement getReimbursementById(int id) {
+        return rDao.getReimbursementById(id);
+    }
+
+//    private String me;
+ //   private String notMe;
+//
+//    public String getMe() {
+//    	return me;
+//    }
+
+//    public String getNotMe() {
+//    	return notMe;
+//}
 	
 }

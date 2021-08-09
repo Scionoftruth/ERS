@@ -91,8 +91,8 @@ let populateTable = (objList) => {
 let submitTicket = async (e) => {
 	e.preventDefault();
 	await verifyLoggedIn();
-	let res = await fetch(`http://localhost:8080/ERS/api/getUser?userid=${userId}`);
-	let user = await res.json();
+	let rese = await fetch(`http://localhost:8080/ERS/api/getUser?userid=${userId}`);
+	let user = await rese.json();
 
 	let amount = document.getElementById("amount").value;
 	let type = document.getElementById("types").value;
