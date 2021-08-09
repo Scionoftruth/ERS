@@ -18,7 +18,7 @@ document.getElementById("logout").addEventListener('click', async () => {
 });
 
 document.getElementById("review").addEventListener('click', () => {
-	location.href = "resources/html/manager-review.html";
+	location.href = "../html/manager-review.html";
 });
 
 /* Reimbursement functions */
